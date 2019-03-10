@@ -9,13 +9,14 @@ function multi(table, separator) {
 }
 
 
-function unmulti(str) {
+function unmulti(str, returnAll) {
 	var separators = ["/", " to ", ", "];
 	var parts = [str];
 	while (parts.length === 1) {
 		parts = str.split(separators.shift());
 		if (separators.length === 0) break;
 	}
+	if (returnAll) return parts;
 	return parts[Math.floor(Math.random()*parts.length)];
 }
 
@@ -52,9 +53,17 @@ function pretty(str) {
 	return alt || str;
 }
 
-
-function emoji(str) {
+function emojiFor(str, findAll) {
 	var emoji = lookupEmoji[str];
+	if (emoji) return emoji;
+	if (findAll) {
+		return unmulti(str, true).map(part => emojiFor(part, true));
+	}
+	return "";
+}
+
+function emojify(str) {
+	var emoji = emojiFor(str);
 	if (emoji) {
 		return pretty(str) + " " + emoji;
 	} else {
@@ -107,7 +116,7 @@ var char = {
 		segments.forEach(seg => {
 
 			if (parse) {
-				html += '<span class="text-' + seg + '">' + emoji(this[seg]) + '</span>';
+				html += '<span class="text-' + seg + '">' + this[seg] + '</span>';
 			} else {
 				html += seg;
 			}
@@ -116,6 +125,15 @@ var char = {
 		});
 
 		return html;
+	},
+	emoji: function() {
+		var sources = [ 
+		this.race,
+		this.class,
+		this.background,
+		this.personality,
+		this.alignment ];
+		return sources.map(s => emojiFor(s, true)).flat(16);
 	}
 };
 
@@ -137,10 +155,11 @@ $(document).ready(function() {
 		char.generate();
 
 		$('#list').prepend(
-			$('<div class="card">').append(
-				$('<div class="card-body">').append(
+			$('<div class="card new">').append(
+				$('<div class="card-body">').append([
+					$('<p class="card-text emoji">').html(char.emoji()),
 					$('<p class="card-text">').html(char.html())
-				)
+				])
 			)
 		);
 

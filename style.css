@@ -1,5 +1,16 @@
 #list .card {
-	margin: 1rem 0;
+	margin: 1rem;
+	flex-grow: 1;
+	flex-shrink: 1;
+}
+
+.card.new {
+	animation: flash 1s ease-out;
+}
+
+@keyframes flash {
+	0% { opacity: 0; filter: brightness(5); }
+	100% { opacity: 1; filter: brightness(1); }
 }
 
 #list .card p {
@@ -7,8 +18,24 @@
 	color: #789;
 }
 
-#list .card:first-child p {
-	font-size: 1.5rem;
+#list .card:first-child {
+	font-size: 1.2rem;
+}
+
+@media (min-width: 576px) { /* SM */
+	
+}
+
+@media (min-width: 768px) { /* MD */
+	.card { width: 33% }
+}
+
+@media (min-width: 992px) { /* LG */
+	
+}
+
+@media (min-width: 1200px) { /* XL */
+	.card { width: 25% }	
 }
 
 .text-race {
@@ -29,4 +56,8 @@
 
 .text-background {
 	color: #f0b805;
+}
+
+.emoji {
+	font-size: 1.5em;
 }

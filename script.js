@@ -9,9 +9,13 @@ function multi(table, separator) {
 }
 
 
-function unmulti(str, separator) {
-	if (!separator) separator = "/";
-	var parts = str.split("/");
+function unmulti(str) {
+	var separators = ["/", " to ", ", "];
+	var parts = [str];
+	while (parts.length === 1) {
+		parts = str.split(separators.shift());
+		if (separators.length === 0) break;
+	}
 	return parts[Math.floor(Math.random()*parts.length)];
 }
 
@@ -42,14 +46,29 @@ function rollOn(table, skip) {
 
 }
 
-function test(table) {
+
+function pretty(str) {
+	var alt = lookupPretty[str];
+	return alt || str;
+}
+
+
+function emoji(str) {
+	var emoji = lookupEmoji[str];
+	if (emoji) {
+		return pretty(str) + " " + emoji;
+	} else {
+		return pretty(str);
+	}
+}
+
+
+
+function test() {
 	var out = {};
 	for (var i=0; i<100000; i++) {
-		var char = {
-			race: rollOn(tableRace),
-			class: rollOn(tableClass)
-		};
-		var result = rollOn(table);
+		char.generate();
+		var result = char.alignment;
 		if (out[result]) {
 			out[result]++;
 		} else {
@@ -59,21 +78,72 @@ function test(table) {
 	console.log(out);
 }
 
-function generate() {
-	var char = {};
-	char.race = rollOn(tableRace);
-	char.class = rollOn(tableClass);
-	char.background = rollOn(tableBackground);
-	char.alignment = rollOn(tableAlignment);
-	char.personality = rollOn(tablePersonality);
-	return char;
+
+var char = {
+	generate: function() {
+		this.race = rollOn(tableRace);
+		this.class = rollOn(tableClass);
+		this.background = rollOn(tableBackground);
+		this.alignment = rollOn(tableAlignment);
+		this.personality = rollOn(tablePersonality);
+		return this;
+	},
+	raceAdjective: function() {
+		var adj = lookupRaceAdjective[this.race];
+		return adj || this.race;
+	},
+	summary: function() {
+		var s = "";
+		s += this.race + " " + this.class + "<br>";
+		s += this.personality + ", " + this.alignment + " " + this.background;
+		return s;
+	},
+	html: function() {
+		var segments = "~race~ ~class~<br>\
+		~personality~, ~alignment~ ~background~".split("~");
+
+		var html = "";
+		var parse = false;
+		segments.forEach(seg => {
+
+			if (parse) {
+				html += '<span class="text-' + seg + '">' + emoji(this[seg]) + '</span>';
+			} else {
+				html += seg;
+			}
+
+			parse = !parse;
+		});
+
+		return html;
+	}
+};
+
+
+var pings = {};
+function ping(p) {
+	if (pings[p]) {
+			pings[p]++;
+		} else {
+			pings[p] = 1;
+		}
 }
 
 
 
 $(document).ready(function() {
 
-	console.log(generate());
-	
+	$('#add-button').on("click", function() {
+		char.generate();
+
+		$('#list').prepend(
+			$('<div class="card">').append(
+				$('<div class="card-body">').append(
+					$('<p class="card-text">').html(char.html())
+				)
+			)
+		);
+
+	});
 
 });

@@ -201,8 +201,8 @@ var lookupEmoji = {
 	"Warlock": "🧿",
 	"Sorcerer": "🔥",
 	"Druid": "☘️",
-	"Bard": "🎷",
-	"Cleric": "🛐",
+	"Bard": "🎸",
+	"Cleric": "🌩",
 
 	"Acolyte": "🕯",
 	"Charlatan": "🎩",
@@ -219,7 +219,7 @@ var lookupEmoji = {
 	"Urchin": "🧸",
 
 	"Lawful Good": "🙂",
-	"Neutral Good": "😁",
+	"Neutral Good": "☺️",
 	"Chaotic Good": "😆",
 	"Lawful Neutral": "😕",
 	"True Neutral": "😶",

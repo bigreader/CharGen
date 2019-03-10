@@ -218,7 +218,7 @@ var lookupEmoji = {
 	"Soldier": "🛡",
 	"Urchin": "🧸",
 
-	"Lawful Good": "🙂",
+	/* "Lawful Good": "🙂",
 	"Neutral Good": "☺️",
 	"Chaotic Good": "😆",
 	"Lawful Neutral": "😕",
@@ -226,7 +226,17 @@ var lookupEmoji = {
 	"Chaotic Neutral": "😏",
 	"Lawful Evil": "😒",
 	"Neutral Evil": "😠",
-	"Chaotic Evil": "🤪",
+	"Chaotic Evil": "🤪", */
+
+	"Lawful Good": "🔵",
+	"Neutral Good": "💙",
+	"Chaotic Good": "🔷",
+	"Lawful Neutral": "⚜️",
+	"True Neutral": "♾",
+	"Chaotic Neutral": "🔆",
+	"Lawful Evil": "🚫",
+	"Neutral Evil": "💢",
+	"Chaotic Evil": "⁉️",
 
 	"Exuberant": "😁",
 	"Bitter": "😕",

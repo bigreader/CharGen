@@ -1,3 +1,8 @@
+function randFrom(arr) {
+	return arr[Math.floor(Math.random() * arr.length)];
+}
+
+
 function multi(table, separator) {
 	if (!separator) separator = "/";
 	var item1 = rollOn(table, "f");
@@ -17,13 +22,13 @@ function unmulti(str, returnAll) {
 		if (separators.length === 0) break;
 	}
 	if (returnAll) return parts;
-	return parts[Math.floor(Math.random()*parts.length)];
+	return randFrom(parts);
 }
 
 
 function rollOn(table, skip) {
 	if (!skip) skip = "";
-	var choice = table[Math.floor(Math.random() * table.length)];
+	var choice = randFrom(table);
 	var type = typeof choice;
 
 	switch (type) {
@@ -55,6 +60,9 @@ function pretty(str) {
 
 function emojiFor(str, findAll) {
 	var emoji = lookupEmoji[str];
+	if (typeof emoji === "object") {
+		emoji = randFrom(emoji);
+	}
 	if (emoji) return emoji;
 	if (findAll) {
 		return unmulti(str, true).map(part => emojiFor(part, true));
@@ -116,7 +124,7 @@ var char = {
 		segments.forEach(seg => {
 
 			if (parse) {
-				html += '<span class="text-' + seg + '">' + this[seg] + '</span>';
+				html += '<span class="text-' + seg + '">' + pretty(this[seg]) + '</span>';
 			} else {
 				html += seg;
 			}

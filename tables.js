@@ -177,19 +177,21 @@ var lookupPretty = {
 	"Gnome": "Gnomish",
 	"Half-Elf": "Half-Elven",
 	"Half-Orc": "Half-Orcish",
-	"Tiefling": "Tiefling"
+	"Tiefling": "Tiefling",
+	"Human/Elf": "Half-Elven",
+	"Human/Orc": "Half-Orcish"
 }
 
 var lookupEmoji = {
-	"Human": "🧑",
-	"Dwarf": "🎅",
-	"Elf": "🧝‍♂️",
-	"Halfling": "🧒",
-	"Dragonborn": "🐲",
-	"Gnome": "👶",
-	"Half-Elf": "👱‍♀️",
-	"Half-Orc": "🧟‍♂️",
-	"Tiefling": "🦹‍♀️",
+	"Human": ["🧑", "👩", "👨"],
+	"Dwarf": ["🤶", "🎅"],
+	"Elf": ["🧝‍♀️", "🧝‍♂️"],
+	"Halfling": ["🧒", "👧", "👦"],
+	"Dragonborn": ["🐲"],
+	"Gnome": ["👶"],
+	"Half-Elf": ["👩‍🦳", "👨‍🦳"],
+	"Half-Orc": ["🧟‍♀️", "🧟‍♂️"],
+	"Tiefling": ["🦹‍♀️", "🦹‍♂️"],
 
 	"Fighter": "⚔️",
 	"Barbarian": "⚒",

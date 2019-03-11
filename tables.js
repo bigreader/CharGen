@@ -184,7 +184,7 @@ var lookupEmoji = {
 	"Human": "🧑",
 	"Dwarf": "🎅",
 	"Elf": "🧝‍♂️",
-	"Halfling": "👦",
+	"Halfling": "🧒",
 	"Dragonborn": "🐲",
 	"Gnome": "👶",
 	"Half-Elf": "👱‍♀️",
